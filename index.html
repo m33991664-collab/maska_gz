@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>maska_gdz — готовые домашние задания</title>
+<style>
+:root{--bg:#000;--card:#0d0b14;--line:#2a2340;--text:#f2effa;--mute:#9a93b3;--a:#8b5cf6;--b:#22d3ee;--c:#f472b6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root,:root[data-theme="dark"]{color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:#000;color:var(--text);font-family:"Trebuchet MS","Segoe UI",Roboto,Arial,sans-serif;line-height:1.5;overflow-x:hidden}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header,main,footer{position:relative;z-index:1}
+.wrap{max-width:1100px;margin:0 auto;padding:0 18px}
+header{display:flex;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto;padding:16px 18px}
+.logo{font-weight:800;font-size:22px;letter-spacing:.5px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;border-radius:50% 50% 46% 46%;background:linear-gradient(135deg,var(--a),var(--b));display:inline-block;position:relative;box-shadow:0 0 18px var(--a)}
+.logo i::before,.logo i::after{content:"";position:absolute;top:11px;width:8px;height:4px;background:#000;border-radius:50%}
+.logo i::before{left:5px;transform:rotate(18deg)}.logo i::after{right:5px;transform:rotate(-18deg)}
+.logo b{color:var(--b)}
+nav{display:flex;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:#120f1d;color:var(--text);padding:9px 16px;border-radius:12px;font:inherit;font-size:14px;cursor:pointer;text-decoration:none}
+.btn.p{background:linear-gradient(135deg,var(--a),#6d28d9);border-color:transparent;box-shadow:0 6px 24px rgba(139,92,246,.45)}
+.btn:focus-visible,.chip:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--b);outline-offset:2px}
+.hero{position:relative;text-align:center;padding:40px 0 70px;overflow:hidden}
+.glow{position:absolute;left:50%;top:50%;width:760px;max-width:140%;height:420px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(139,92,246,.35),rgba(34,211,238,.1) 60%,transparent);pointer-events:none}
+.hero .in{position:relative;z-index:2}
+h1{font-size:clamp(34px,8vw,68px);line-height:1.05;margin:20px 0 12px;font-weight:900;letter-spacing:-1px;text-shadow:0 0 40px rgba(139,92,246,.5)}
+.sub{color:var(--mute);font-size:18px;margin:0 0 26px}
+.search{display:flex;gap:8px;max-width:520px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+input,select{background:#0d0b14;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;font-size:16px;flex:1 1 150px;min-width:0}
+h2{font-size:clamp(24px,5vw,34px);margin:50px 0 6px}
+.lead{color:var(--mute);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.card{background:linear-gradient(160deg,#150f26,var(--card));border:1px solid var(--line);border-radius:20px;padding:20px;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:var(--a);box-shadow:0 0 28px rgba(139,92,246,.3)}
+.card h3{margin:0 0 4px;font-size:20px}
+.card .ic{font-size:34px;display:inline-block}
+.card p{margin:0 0 12px;color:var(--mute);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{min-width:38px;padding:7px 10px;border-radius:10px;border:1px solid var(--line);background:#1a1430;color:var(--text);font:inherit;font-size:14px;cursor:pointer}
+.chip:hover,.chip.on{background:var(--a);border-color:var(--a);box-shadow:0 0 16px var(--a)}
+.panel{margin-top:26px;border:1px solid var(--line);border-radius:20px;background:#0d0b14;padding:20px;display:none;box-shadow:0 0 40px rgba(34,211,238,.12)}
+.panel.show{display:block}
+.panel h3{margin:0 0 12px}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.book{border:1px solid var(--line);border-radius:14px;padding:12px 14px;background:#120f1d;display:flex;gap:10px;align-items:center}
+.book span{font-size:22px}
+.empty{color:var(--mute)}
+[hidden]{display:none!important}
+#view{padding-top:10px;min-height:60vh}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.part{text-align:left;font:inherit;color:var(--text);cursor:pointer;background:linear-gradient(160deg,#150f26,var(--card));border:1px solid var(--line);border-radius:20px;padding:36px 24px;transition:border-color .2s,box-shadow .2s}
+.part:hover,.part:focus-visible{border-color:var(--b);box-shadow:0 0 28px rgba(34,211,238,.25);outline:none}
+.part b{display:block;font-size:30px;margin-bottom:6px}
+.part span{color:var(--mute);font-size:15px}
+.crumbs{font-size:14px;color:var(--mute);margin:6px 0 4px}
+.crumbs a{color:var(--b);text-decoration:none}.crumbs a:hover{text-decoration:underline}
+.ph{font-size:clamp(28px,6vw,44px);margin:10px 0 12px;text-shadow:none;letter-spacing:-.5px}
+.blist{display:grid;gap:10px;max-width:720px;margin-bottom:10px}
+button.book{width:100%;font:inherit;color:var(--text);text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+button.book:hover,button.book:focus-visible{border-color:var(--a);box-shadow:0 0 20px rgba(139,92,246,.3);outline:none}
+.txt{max-width:760px;color:var(--mute);font-size:15px}
+.meta{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:6px;color:var(--mute);font-size:15px}
+.meta b{color:var(--text);font-weight:600}
+.tip{max-width:760px;border-left:3px solid var(--b);padding:6px 0 6px 16px;margin:0 0 10px}
+.tip b{display:block;font-size:17px}.tip span{color:var(--mute);font-size:14px}
+.pages{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:640px;margin-bottom:10px}
+.pg{height:52px;border-radius:8px;border:0;background:#1e90ff;color:#fff;font:inherit;font-size:18px;font-weight:700;cursor:pointer;box-shadow:0 4px 14px rgba(30,144,255,.25);transition:background .15s,transform .1s}
+.pg:hover,.pg:focus-visible{background:#4aa8ff;outline:none}
+.pg:active{transform:scale(.96)}
+.rec{display:flex;flex-wrap:wrap;gap:10px}
+.task{max-width:760px;border:1px solid var(--line);border-radius:16px;background:var(--card);padding:16px 18px;margin-bottom:14px}
+.task b{color:var(--b);font-size:18px}
+.task .q{color:var(--mute);font-size:14px;margin:6px 0 10px}
+.task .a{margin:0;line-height:1.7}
+.modal{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.8)}
+.dlg{position:relative;width:100%;max-width:400px;background:#0d0b14;border:1px solid var(--line);border-radius:22px;padding:28px 22px 22px;box-shadow:0 0 50px rgba(139,92,246,.3)}
+.dlg h3{margin:0 0 6px;font-size:22px}
+.dlg p{margin:0 0 20px;color:var(--mute);font-size:14px}
+.x{position:absolute;top:10px;right:12px;width:36px;height:36px;border:0;border-radius:50%;background:#1a1430;color:var(--text);font-size:22px;cursor:pointer}
+.soc{display:flex;align-items:center;gap:14px;width:100%;margin-top:10px;padding:13px 16px;border:0;border-radius:14px;background:#fff;color:#111;font:inherit;font-size:16px;font-weight:600;cursor:pointer}
+.soc:hover,.soc:focus-visible{box-shadow:0 0 0 3px var(--a);outline:none}
+.soc svg{width:24px;height:24px;flex:none}
+.dlg input{display:block;width:100%;flex:none;margin:0 0 6px}
+.dlg .btn.p{width:100%;margin-top:6px}
+.er{color:#f87171;font-size:14px;min-height:20px;margin:4px 0 8px}
+.lnk{background:none;border:0;color:var(--b);font:inherit;font-size:14px;cursor:pointer;margin-top:12px;padding:4px 0}
+.demo{font-size:13px;color:var(--mute);border-left:3px solid var(--a);padding-left:10px;margin:0 0 14px}
+.nm{display:inline-block;font-size:22px;margin:30px 0 12px;padding-bottom:2px;border-bottom:3px solid var(--a)}
+.cond{max-width:760px;background:#15112a;border:1px solid var(--line);border-radius:20px;padding:18px 20px;font-size:17px}
+.ans{position:relative;max-width:760px;margin-top:44px;border:2px solid var(--b);border-radius:0 20px 20px 20px;padding:20px;box-shadow:0 0 24px rgba(34,211,238,.15)}
+.tab{position:absolute;left:-2px;top:-36px;height:36px;padding:0 24px;background:var(--b);color:#000;font-weight:700;border-radius:14px 14px 0 0;display:flex;align-items:center}
+.at{font-size:17px;line-height:1.8}
+.ex{display:inline-flex;align-items:center;gap:12px;margin-top:16px;background:var(--a);color:#fff;border:0;border-radius:30px;padding:8px 24px 8px 8px;font:inherit;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(139,92,246,.4)}
+.ex i{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--a);display:grid;place-items:center;font-style:normal;transition:transform .2s}
+.ex.open i{transform:rotate(180deg)}
+.et{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);color:var(--mute);line-height:1.6}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:10px}
+.how div{border-left:3px solid var(--b);padding:4px 0 4px 16px}
+.how b{display:block;font-size:18px}.how span{color:var(--mute);font-size:14px}
+.note{margin:50px 0 0;padding:22px;border-radius:20px;background:linear-gradient(135deg,#1b1233,#07161c);border:1px solid var(--line);color:var(--mute);font-size:15px}
+footer{margin-top:60px;border-top:1px solid var(--line);padding:30px 0 40px;color:var(--mute);font-size:14px}
+footer .row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-bottom:14px}
+footer a{color:var(--mute);text-decoration:none}footer a:hover{color:var(--text)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:#1a1430;border:1px solid var(--a);padding:12px 18px;border-radius:14px;opacity:0;transition:.25s;z-index:5;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:560px){.btn.hide{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<header>
+  <a class="logo" href="#top"><i></i><span>maska<b>_</b>gdz</span></a>
+  <nav>
+    <a class="btn hide" href="#predmety">Предметы</a>
+    <button class="btn p" id="login">Вход</button>
+  </nav>
+</header>
+<main id="top">
+  <section class="hero" id="hero">
+    <div class="glow"></div>
+    <div class="wrap in">
+      <h1>Готовые домашние задания</h1>
+      <p class="sub">С пояснениями от преподавателей-практиков</p>
+      <div class="search">
+        <select id="fs" aria-label="Предмет"></select>
+        <select id="fc" aria-label="Класс"></select>
+        <button class="btn p" id="go">Найти решения</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap" id="home">
+    <h2 id="predmety">Выбери класс и предмет</h2>
+    <p class="lead">Нажми на номер класса — откроются учебники.</p>
+    <div class="grid" id="grid"></div>
+    
+
+    <h2>Как это работает</h2>
+    <div class="how">
+      <div><b>Выбери предмет</b><span>С 1 по 11 класс: от математики до химии.</span></div>
+      <div><b>Найди свой учебник</b><span>Автор и год издания указаны в каждом разделе.</span></div>
+      <div><b>Разберись в решении</b><span>Читай пояснение и сверяй с тем, что получилось у тебя.</span></div>
+    </div>
+
+    <div class="note">ГДЗ нужны, чтобы проверить себя и понять ход решения. Сначала попробуй решить сам, а потом сверяйся с ответом — так знания остаются с тобой.</div>
+  </div>
+<div class="wrap" id="view" hidden></div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="row"><a href="#top">О нас</a><a href="#top">Блог</a><a href="#top">Контакты</a><a href="#top">Правообладателям</a></div>
+    <div>© 2026 maska_gdz — Все права защищены</div>
+  </div>
+</footer>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="mt">
+  <div class="dlg">
+    <button class="x" id="mx" aria-label="Закрыть">×</button>
+    <h3 id="mt">Войдите удобным способом</h3>
+    <p>Выберите аккаунт, с которым хотите войти.</p>
+    <button class="soc" data-s="Google"><svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.9 2.4 30.4 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7c-.5-1.4-.8-3-.8-4.7s.3-3.2.8-4.7l-7.9-6.1C.9 16.4 0 20.1 0 24s.9 7.6 2.6 10.8l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>Войти через Google</button>
+    <button class="soc" data-s="Mail.ru"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#168DE2"/><text x="12" y="17.5" text-anchor="middle" font-size="15" font-weight="700" fill="#fff" font-family="Arial,sans-serif">@</text></svg>Войти через Mail.ru</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+var S=[
+ {n:"Математика",i:"➗",c:[1,2,3,4,5,6]},
+ {n:"Русский язык",i:"✍️",c:[1,2,3,4,5,6,7,8,9]},
+ {n:"Английский язык",i:"🌍",c:[2,3,4,5,6,7,8,10,11]},
+ {n:"Литературное чтение",i:"📖",c:[2,3,4]},
+ {n:"Окружающий мир",i:"🌳",c:[1,2,3,4]},
+ {n:"Биология",i:"🧬",c:[5,6,7,8,9,10]},
+ {n:"Алгебра",i:"📐",c:[7,8,9]},
+ {n:"Геометрия",i:"📏",c:[7]},
+ {n:"Физика",i:"⚡",c:[7,8,9]},
+ {n:"История",i:"🏛️",c:[5,6,7,8,9,10,11]},
+ {n:"Обществознание",i:"⚖️",c:[6,7,8,9,10,11]},
+ {n:"Химия",i:"⚗️",c:[8,9,10,11]}
+];
+var B={
+ "Математика":{1:["Моро — учебник","Моро — рабочая тетрадь","Дорофеев, Миракова — учебник","Волкова — проверочные работы"],2:["Моро — учебник","Петерсон — учебник","Дорофеев — учебник","Волкова — проверочные работы"],3:["Моро — учебник","Петерсон — учебник","Дорофеев — учебник","Волкова — проверочные работы"],4:["Учебник Моро, Волкова, Бантова","Рабочая тетрадь Волкова","Проверочные работы Волкова","Учебник Дорофеев, Миракова, Бука","Рабочая тетрадь Дорофеев, Миракова, Бука","Учебник Петерсон"],5:["Мерзляк — учебник","Виленкин — учебник","Дорофеев — учебник","Никольский — учебник"],6:["Виленкин — учебник","Мерзляк — учебник","Ткачёва — рабочая тетрадь","Виленкин — контрольные работы"]},
+ "Русский язык":{1:["Канакина — учебник","Горецкий — азбука","Александрова — учебник"],5:["Ладыженская — учебник","Рыбченкова — учебник"],7:["Баранов — учебник"],8:["Бархударов — учебник"],9:["Бархударов — учебник"]},
+ "Алгебра":{7:["Макарычев — учебник","Мерзляк — учебник","Крайнева — контрольные работы"],8:["Мерзляк — учебник","Макарычев — учебник"],9:["Макарычев — учебник"]},
+ "Геометрия":{7:["Атанасян — учебник"]},
+ "Химия":{8:["Габриелян — учебник"],9:["Габриелян — учебник","Габриелян, Остроумов — учебник"],10:["Габриелян — учебник","Габриелян, Остроумов — учебник"]},
+ "История":{9:["Мединский — учебник","Мединский, Торкунов — учебник"],10:["Мединский — учебник","Мединский, Торкунов — учебник"],11:["Мединский — учебник","Мединский, Торкунов — учебник"]},
+ "Биология":{5:["Пасечник — учебник"],6:["Пасечник — учебник"],7:["Пасечник — учебник"],8:["Пасечник — учебник"]}
+};
+var grid=document.getElementById("grid"),hero=document.getElementById("hero"),home=document.getElementById("home"),view=document.getElementById("view"),fs=document.getElementById("fs"),fc=document.getElementById("fc"),toast=document.getElementById("toast");
+function say(t){toast.textContent=t;toast.classList.add("show");clearTimeout(say.t);say.t=setTimeout(function(){toast.classList.remove("show")},2200)}
+fs.innerHTML='<option value="">Предмет</option>'+S.map(function(s,k){return '<option value="'+k+'">'+s.n+'</option>'}).join("");
+fc.innerHTML='<option value="">Класс</option>'+[1,2,3,4,5,6,7,8,9,10,11].map(function(c){return '<option>'+c+'</option>'}).join("");
+S.forEach(function(s,k){
+  var d=document.createElement("div");d.className="card";
+  d.innerHTML='<span class="ic">'+s.i+'</span><h3>'+s.n+'</h3><p>'+s.c.length+' '+(s.c.length<5?'класса':'классов')+'</p><div class="chips"></div>';
+  var ch=d.querySelector(".chips");
+  s.c.forEach(function(c){var b=document.createElement("button");b.className="chip";b.textContent=c;b.setAttribute("aria-label",s.n+", "+c+" класс");b.onclick=function(){open(k,c)};ch.appendChild(b)});
+  grid.appendChild(d);
+});
+var cur={};
+function show(v){hero.hidden=v;home.hidden=v;view.hidden=!v;scrollTo(0,0)}
+function open(k,c){cur={k:k,c:c,b:0};render();show(true)}
+var BK={"Математика|4|0":{t:"Математика 4 класс учебник Моро, Бантова 1, 2 часть",m:[["Тип","ГДЗ, решебник"],["Авторы","Моро М. И., Бантова М. А., Бельтюкова Г. В. и др."],["Части","1 и 2"],["Год","2020–2026"],["Серия","Школа России (ФГОС)"],["Издательство","Claude"]],p:[[3,111,[3]],[3,127]]}};
+var SOL={"0|1|4":[
+{t:"Сравни числа (вверху страницы)",q:"999 … 1000 и 1000 … 601",a:"999 &lt; 1000, так как 999 — это на 1 меньше тысячи.<br>1000 &gt; 601, так как 1000 — это 10 сотен, а 601 — всего 6 сотен и 1 единица."},
+{t:"Задание 1",q:"Сколько всего пуговиц: 6 сотен, 5 десятков и 5 отдельных пуговиц?",a:"6 сотен = 600<br>5 десятков = 50<br>5 единиц = 5<br>600 + 50 + 5 = 655<br><b>Ответ: 655 пуговиц.</b>"},
+{t:"Задание 2 (1)",q:"Назови и запиши числа, которые содержат:",a:"9 дес. 9 ед. = 99 (девяносто девять)<br>9 дес. 0 ед. = 90 (девяносто)<br>9 сот. 9 дес. 9 ед. = 999 (девятьсот девяносто девять)<br>9 сот. 0 дес. 9 ед. = 909 (девятьсот девять)<br>9 сот. 0 дес. 0 ед. = 900 (девятьсот)<br>9 сот. 9 дес. 0 ед. = 990 (девятьсот девяносто)"},
+{t:"Задание 2 (2)",q:"Какое число называют при счёте перед каждым из этих чисел и после него?",a:"98, <b>99</b>, 100<br>89, <b>90</b>, 91<br>998, <b>999</b>, 1000<br>908, <b>909</b>, 910<br>899, <b>900</b>, 901<br>989, <b>990</b>, 991"},
+{t:"Задание 3 (1)",q:"Прочитай числа, записанные в таблице. На каком месте, считая справа налево, пишут единицы? десятки? сотни?",a:"672 — шестьсот семьдесят два<br>206 — двести шесть<br>840 — восемьсот сорок<br><b>Единицы</b> пишут на первом месте (I разряд), <b>десятки</b> — на втором (II разряд), <b>сотни</b> — на третьем (III разряд)."},
+{t:"Задание 3 (2)",q:"Сколько единиц каждого разряда в числе 672? 206? 840? 400? 590?",a:"672: 6 сотен, 7 десятков, 2 единицы<br>206: 2 сотни, 0 десятков, 6 единиц<br>840: 8 сотен, 4 десятка, 0 единиц<br>400: 4 сотни, 0 десятков, 0 единиц<br>590: 5 сотен, 9 десятков, 0 единиц"}
+]};
+var EX={"0|1|4":[
+"Сравнивай числа по числу цифр: в числе 1000 четыре цифры, в 999 и 601 — по три. Значит, 1000 больше обоих чисел.",
+"Каждые 10 единиц объединяются в десяток, а 10 десятков — в сотню. Переведи каждый разряд в единицы и сложи: 600 + 50 + 5.",
+"Число записывается по разрядам: слева сотни, потом десятки, потом единицы. Если разряда нет (0), на его месте пишем ноль.",
+"При счёте число перед данным на 1 меньше, а число после него на 1 больше. Например, после 999 идёт 1000, а перед 900 стоит 899.",
+"Читай число по разрядам: сотни, десятки, единицы. Считая справа налево, первое место занимают единицы, второе — десятки, третье — сотни.",
+"Посмотри на каждую цифру: первая слева — сотни, средняя — десятки, последняя — единицы. Ноль означает, что таких единиц в числе нет."
+]};
+function sol(i,pt,n,title){
+  var h='<button class="btn" id="bk">← К страницам</button><h1 class="ph">'+title+', часть '+pt+', страница '+n+'</h1>';
+  var k=i+'|'+pt+'|'+n;SOL[k].forEach(function(x,j){var e=(EX[k]||[])[j];h+='<h3 class="nm">'+x.t.replace('Задание','Номер')+'.</h3><div class="cond">'+x.q+'</div><div class="ans"><span class="tab">Ответ:</span><div class="at">'+x.a+'</div>'+(e?'<button class="ex"><i>⌵</i><span>Пояснение [открыть]</span></button><div class="et" hidden>'+e+'</div>':'')+'</div>'});
+  view.innerHTML=h;scrollTo(0,0);
+  view.querySelector("#bk").onclick=function(){book(i)};
+  view.querySelectorAll(".ex").forEach(function(b){b.onclick=function(){var t=b.nextElementSibling,o=t.hidden;t.hidden=!o;b.classList.toggle("open",o);b.querySelector("span").textContent=o?"Пояснение [скрыть]":"Пояснение [открыть]"}});
+}
+function book(i){
+  var s=S[cur.k],c=cur.c,list=B[s.n][c],t=list[i],d=BK[s.n+'|'+c+'|'+i];
+  var title=d?d.t:s.n+' '+c+' класс '+t.charAt(0).toLowerCase()+t.slice(1);
+  var h='<h1 class="ph">'+title+'</h1>';
+  if(d){h+='<ul class="meta">'+d.m.map(function(r){return '<li><b>'+r[0]+':</b> '+r[1]+'</li>'}).join('')+'</ul>'}
+  h+='<div class="tip"><b>Уникальная разработка наших методистов</b><span>К каждому заданию есть пояснение по шагам, чтобы быстро и понятно объяснить домашнее задание ребёнку.</span></div>';
+  if(d){d.p.forEach(function(r,n){h+='<h2>Часть '+(n+1)+'. Страницы учебника</h2><div class="pages">';for(var x=r[0];x<=r[1];x++){if(r[2]&&r[2].indexOf(x)>=0)continue;h+='<button class="pg" data-pt="'+(n+1)+'" data-n="'+x+'">'+x+'</button>'}h+='</div>'})}
+  else{h+='<h2>Страницы</h2><p class="empty">Страницы этого пособия скоро появятся.</p>'}
+  h+='<p class="txt">Решебник — это инструмент для понимания, а не для бездумного копирования. Анализируй ход решения, тренируй навыки и сверяй свои ответы.</p>';
+  view.innerHTML=h;scrollTo(0,0);
+  view.querySelectorAll(".pg").forEach(function(b){b.onclick=function(){if(SOL[i+'|'+b.dataset.pt+'|'+b.dataset.n]){sol(i,b.dataset.pt,b.dataset.n,title)}else{say("Решения страницы "+b.dataset.n+" скоро появятся")}}});
+}
+var P={"Математика":"математике","Русский язык":"русскому языку","Английский язык":"английскому языку","Литературное чтение":"литературному чтению","Окружающий мир":"окружающему миру","Биология":"биологии","Алгебра":"алгебре","Геометрия":"геометрии","Физика":"физике","История":"истории","Обществознание":"обществознанию","Химия":"химии"};
+function render(){
+  var s=S[cur.k],list=(B[s.n]&&B[s.n][cur.c])||[],p=P[s.n],c=cur.c;
+  var h='<nav class="crumbs"><a href="#" id="c1">Главная</a> / <a href="#" id="c2">'+s.n+'</a> / <span>'+c+' класс</span></nav>';
+  h+='<h1 class="ph">ГДЗ по '+p+' '+c+' класс</h1><p class="txt">В разделе опубликованы подробные разборы заданий по '+p+' для '+c+' класса. Пояснения помогают повторить темы и подготовиться к самостоятельным и контрольным работам.</p>';
+  h+='<h2>Учебники и рабочие тетради по '+p+' для '+c+' класса</h2>';
+  if(list.length){h+='<p class="lead">Выберите учебник или рабочую тетрадь:</p><div class="blist">'+list.map(function(t,i){return '<button class="book" data-i="'+i+'"><span>📘</span>'+t+'</button>'}).join('')+'</div>'}
+  else{h+='<p class="empty">Учебники для этого класса скоро появятся.</p>'}
+  h+='<p class="txt">Каждое решение объясняется шаг за шагом: от анализа условия до проверки результата. Используйте материалы для разбора сложных задач, повторения перед контрольными или быстрой проверки домашней работы.</p>';
+  var oc=s.c.filter(function(x){return x!==c});
+  if(oc.length){h+='<h2>Другие классы по '+p+'</h2><div class="tabs">'+oc.map(function(x){return '<button class="chip" data-c="'+x+'">'+x+' класс</button>'}).join('')+'</div>'}
+  view.innerHTML=h;
+  view.querySelector("#c1").onclick=view.querySelector("#c2").onclick=function(e){e.preventDefault();show(false)};
+  view.querySelectorAll(".book").forEach(function(b){b.onclick=function(){book(+b.dataset.i)}});
+  view.querySelectorAll(".tabs .chip").forEach(function(b){b.onclick=function(){open(cur.k,+b.dataset.c)}});
+}
+document.getElementById("go").onclick=function(){
+  if(fs.value===""){say("Выбери предмет");return}
+  var s=S[+fs.value],c=+fc.value;
+  if(!c){c=s.c[0]}
+  if(s.c.indexOf(c)<0){say(s.n+": нет "+c+" класса");return}
+  open(+fs.value,c);
+};
+var md=document.getElementById("modal");
+document.getElementById("login").onclick=function(){md.hidden=false;md.querySelector(".soc").focus()};
+document.getElementById("mx").onclick=function(){md.hidden=true};
+md.addEventListener("click",function(e){if(e.target===md)md.hidden=true});
+addEventListener("keydown",function(e){if(e.key==="Escape")md.hidden=true});
+md.querySelectorAll(".soc").forEach(function(b){b.onclick=function(){
+  say("Вход через "+b.dataset.s+" пока не подключён")
+}});
+/* stars */
+var cv=document.getElementById("stars"),cx=cv.getContext("2d"),st=[],W,H;
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight}
+rs();addEventListener("resize",rs);
+for(var j=0;j<140;j++)st.push({x:Math.random(),y:Math.random(),z:Math.random()*.9+.1});
+var calm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+function draw(){
+  cx.clearRect(0,0,W,H);cx.fillStyle="#fff";
+  st.forEach(function(p){
+    if(!calm){p.y+=p.z*.0006;if(p.y>1)p.y=0}
+    cx.globalAlpha=p.z*.8;cx.beginPath();cx.arc(p.x*W,p.y*H,p.z*1.4,0,6.3);cx.fill();
+  });
+  if(!calm)requestAnimationFrame(draw);
+}
+draw();
+})();
+</script>
+</body>
+</html>
